@@ -1,5 +1,9 @@
 # Mockercinno
 
+[![Build Status](https://travis-ci.org/alexnaish/mockercinno.svg?branch=master)](https://travis-ci.org/alexnaish/mockercinno)
+[![Code Climate](https://codeclimate.com/github/alexnaish/mockercinno/badges/gpa.svg)](https://codeclimate.com/github/alexnaish/mmockercinno)
+[![Dependencies](https://david-dm.org/alexnaish/mockercinno.svg)](https://david-dm.org/alexnaish/mockercinno)
+
 Simple, declarative mock server.
 
 ## Introduction
