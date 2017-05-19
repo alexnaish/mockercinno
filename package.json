@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon bin/mockercinno -p examples/**/*",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "eslint ."
   },
@@ -18,6 +19,7 @@
     "lodash": "^4.17.4",
     "minimatch": "^3.0.4",
     "nedb": "^1.8.0",
+    "path-match": "^1.2.4",
     "pino": "^4.5.2"
   },
   "devDependencies": {

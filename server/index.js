@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('pino')();
 
+const responder = require('./responder');
 const mockStore = require('./stores').mock;
 const requestStore = require('./stores').request;
 
@@ -13,45 +14,41 @@ app.get('/favicon.ico', function(request, response) {
     return response.sendStatus(204);
 });
 
-app.get('/__list', (request, res) => {
+app.get('/__list', (request, response) => {
 	const search = request.query.path ? { 'request.path': new RegExp(request.query.path) } : {} ;
 	mockStore.list(search)
 		.then(results => {
-			res.status(200).json(results);
+			response.status(200).json(results);
 		})
 		.catch(err => {
 			logger.error('err', err);
-			return res.status(500).json({});
+			return response.status(500).json({});
 		});
 });
 
-app.get('/__requests', (request, res) => {
+app.get('/__requests', (request, response) => {
 	requestStore.list()
 		.then(results => {
-			res.status(200).json(results);
+			return response.status(200).json(results);
 		})
 		.catch(err => {
 			logger.error('err', err);
-			return res.status(500).json({});
+			return response.status(500).json({});
 		});
 });
 
-app.all('*', (request, res) => {
+app.all('*', (request, response) => {
 	mockStore.find(request)
 		.then(mock => {
 			if (mock) {
-				// mock.response.headers.map(header => {
-				// 	res.set(header.key, header.value);
-				// });
-				return res.status(mock.response.status).json(mock.response.body);
+				return responder(mock, request, response);
 			} else {
-				return res.status(404).json({});
+				return response.status(404).json({});
 			}
-
 		})
-		.catch((err) => {
+		.catch(err => {
 			logger.error('err', err);
-			return res.status(500).json({});
+			return response.status(500).json({});
 		});
 
 });

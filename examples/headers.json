@@ -11,6 +11,12 @@
 			"status": 200,
 			"body": {
 				"data": "something"
+			},
+			"headers": {
+				"some-api-token": "123123"
+			},
+			"cookies": {
+				"secret": "123123"
 			}
 		}
 	}

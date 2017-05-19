@@ -1,0 +1,21 @@
+[
+	{
+		"request": {
+			"method": "POST",
+			"path": "/named/:name/test"
+		},
+		"response": {
+			"status": 200,
+			"body": {
+				"query_given": "{{query.test}}",
+				"param_given": "{{params.name}}",
+				"header_given": "{{headers['x-api-env']}}",
+				"body_given": "{{body}}",
+				"body_property": "{{body.key}}",
+				"body_property_value": "{{body.key.value}}",
+				"status": "{{mock.response.status}}",
+				"mock_path": "{{mock.request.path}}"
+			}
+		}
+	}
+]
