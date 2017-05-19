@@ -1,6 +1,7 @@
-const _get = require('lodash/get');
 const _map = require('lodash/mapKeys');
 const route = require('path-match')();
+
+const Template = require('./template');
 
 module.exports = (mock, request, response) => {
 
@@ -24,10 +25,10 @@ module.exports = (mock, request, response) => {
 		});
 	}
 
-	let templateJson = JSON.stringify(mock.response.body).replace(/\{\{([a-z.\-\d\'\"\[\]]*)\}\}/gi, (_, key) => {
-		const variable = _get(parameters, key);
-		return typeof variable === 'object' ? JSON.stringify(variable) : variable;
-	}).replace(/\"\{/g, '{').replace(/\}\"/g, '}');
+	let template = Template(mock.response.body);
+	template.compile(parameters);
 
-	return response.status(mock.response.status).json(JSON.parse(templateJson));
+	const renderFunction = template.isJson() ? 'json' : 'send';
+	return response.status(mock.response.status)[renderFunction](template.render());
+
 };

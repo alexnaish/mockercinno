@@ -20,7 +20,7 @@ module.exports = {
 	find: (request) => {
 		return new Promise((resolve, reject) => {
 			db.findOne({
-				'request.method': request.method,
+				'request.method': request.method || 'GET',
 				$and: [
 					{
 						$where: function () {
