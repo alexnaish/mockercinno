@@ -6,7 +6,9 @@ module.exports = [
 		},
 		response: {
 			status: 200,
-			body: new Date()
+			body: {
+				date: new Date()
+			}
 		}
 	}
 ];

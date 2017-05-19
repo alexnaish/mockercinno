@@ -6,7 +6,9 @@
 		},
 		"response": {
 			"status": 200,
-			"body": "something"
+			"body": {
+				"data": "something"
+			}
 		}
 	}
 ]

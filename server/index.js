@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const logger = require('pino')();
 
 const mockStore = require('./stores').mock;
+const requestStore = require('./stores').request;
 
 const app = express();
 
@@ -24,6 +25,17 @@ app.get('/__list', (request, res) => {
 		});
 });
 
+app.get('/__requests', (request, res) => {
+	requestStore.list()
+		.then(results => {
+			res.status(200).json(results);
+		})
+		.catch(err => {
+			logger.error('err', err);
+			return res.status(500).json({});
+		});
+});
+
 app.all('*', (request, res) => {
 	mockStore.find(request)
 		.then(mock => {
@@ -31,7 +43,7 @@ app.all('*', (request, res) => {
 				// mock.response.headers.map(header => {
 				// 	res.set(header.key, header.value);
 				// });
-				return res.status(mock.response.status).json(mock);
+				return res.status(mock.response.status).json(mock.response.body);
 			} else {
 				return res.status(404).json({});
 			}

@@ -8,8 +8,8 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			db.find(search, { _id: 0 }, (err, results) => {
 				if (err) {
-return reject(err);
-}
+					return reject(err);
+				}
 				return resolve(results);
 			});
 		});
@@ -45,8 +45,8 @@ return reject(err);
 				]
 			}, { _id: 0 }, (err, results) => {
 				if (err) {
-return reject(err);
-}
+					return reject(err);
+				}
 				return resolve(results);
 			});
 		});

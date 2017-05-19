@@ -4,7 +4,7 @@ Simple, declarative mock server.
 
 ## Installation
 
-`npm install scholar-runner --save-dev`
+`npm install mockercinno --save-dev`
 
 ## Usage
 
@@ -14,7 +14,7 @@ Simple, declarative mock server.
 
 *  Node 6 (or greater)
 
-## Example Mocks
+## Example Mock File
 
 ```
 
@@ -26,12 +26,61 @@ Simple, declarative mock server.
 		},
 		"response": {
 			"status": 200,
-			"body": "something"
+			"body": {
+				"data": "something"
+			}
 		}
 	}
 ]
 
+```
 
+## Advanced Details
+
+### Route Matching
+
+The way mocks are matched against incoming requests follows a similar pattern to how Express handles route definitions.
+If you specify a "greedy" route first, then it will catch all similar routes even if the others are more specific.
+
+### Request Schema
+
+There are several levels of granularity when specifying a request depending on your requirements.
+Properties are optimistically matched, meaning that if you specify one particular query parameter and the request contains that parameter in addition to others, it will return the mock as a match.
+You can limit a mock against the following properties of a request:
+
+*  `method` - A uppercased string of the required HTTP request method.
+*  `path` - Either a direct path mapping or a `minimatch` compatible RegExp string.
+*  `query` - An object containing required key-value query parameters.
+*  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
+*  `body` - An object for which a request request body must contain for it to match.
+
+An example of the above settings:
+
+```
+
+[
+	{
+		"request": {
+			"method": "POST",
+			"path": "/standard/*",
+			"query": {
+				"test": "yes"
+			},
+			"headers": {
+				"x-test": "yes"
+			},
+			"body": {
+				"user": "example"
+			}
+		},
+		"response": {
+			"status": 200,
+			"body": {
+				"data": "something"
+			}
+		}
+	}
+]
 
 ```
 
