@@ -1,0 +1,15 @@
+[
+	{
+		"request": {
+			"method": "POST",
+			"path": "/body/*",
+			"body": {
+				"x-api-env": "TEST"
+			}
+		},
+		"response": {
+			"status": 200,
+			"body": "something"
+		}
+	}
+]

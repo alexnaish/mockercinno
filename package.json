@@ -1,0 +1,29 @@
+{
+  "name": "mockercinno",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "eslint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "commander": "^2.9.0",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "glob": "^7.1.1",
+    "lodash": "^4.17.4",
+    "minimatch": "^3.0.4",
+    "nedb": "^1.8.0",
+    "pino": "^4.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "husky": "^0.13.3",
+    "jest": "^20.0.3",
+    "nodemon": "^1.11.0"
+  }
+}

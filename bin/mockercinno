@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+const commands = require('commander');
+const glob = require('glob');
+const fs = require('fs');
+const path = require('path');
+
+const server = require('../server/');
+const mockStore = require('../server/stores').mock;
+
+const requireAndParse = filePath => {
+	const fileContents = require(path.join(process.cwd(), filePath));
+	return (typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents);
+};
+
+commands
+  .option('-f, --file <name>', 'File containing an array of mock schemas')
+  .option('-p, --pattern <name>', 'File pattern for files containing mock schemas')
+  .parse(process.argv)
+
+let defaults = [];
+
+if (commands.file) {
+  defaults = defaults.concat(requireAndParse(commands.file));
+}
+
+if (commands.pattern) {
+	glob.sync(commands.pattern, {nodir: true}).map(file => {
+		defaults = defaults.concat(requireAndParse(file));
+	});
+}
+
+mockStore.insert(defaults);
+
+server.listen('8080', () => {
+	console.log(`Mock Server started on port ${8080}!`);
+});
