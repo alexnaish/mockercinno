@@ -41,8 +41,10 @@ app.all('*', (request, response) => {
 	mockStore.find(request)
 		.then(mock => {
 			if (mock) {
+        process.env.DEBUG && logger.error('200', request.originalUrl, mock);
 				return responder(mock, request, response);
 			} else {
+        process.env.DEBUG && logger.error('404', request.originalUrl, { query: request.query, headers: request.headers, body: request.body });
 				return response.status(404).json({});
 			}
 		})
