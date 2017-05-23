@@ -51,7 +51,7 @@ if (commands.pattern) {
 	  	.on('add', path => {
 				if(!preRequiredFiles.includes(path)) {
 					const data = requireAndParse(path);
-					data && mockStore.insert(requireAndParse(path));
+					data && mockStore.insert(data);
 				}
 			})
 	  	.on('change', filePath => {

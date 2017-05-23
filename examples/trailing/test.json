@@ -1,0 +1,17 @@
+[
+	{
+		"request": {
+			"method": "GET",
+			"path": "/trailing/:name",
+			"query": {
+				"test": "true"
+			}
+		},
+		"response": {
+			"status": 200,
+			"body": {
+				"param_given": "{{params.name}}"
+			}
+		}
+	}
+]
