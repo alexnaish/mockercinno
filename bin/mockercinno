@@ -13,8 +13,9 @@ const preRequiredFiles = [];
 const requireAndParse = filePath => {
 	try {
 		const fileContents = require(path.join(process.cwd(), filePath));
-		return (typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents);
+		const parsedContents = typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents;
 		preRequiredFiles.push(filePath);
+		return parsedContents;
 	} catch (e) {
 		console.error(`Failed to parse "${filePath}"`);
 	}
@@ -31,8 +32,9 @@ const requireFilesByGlob = globString => {
 }
 
 commands
-	.option('-f, --file <name>', 'File containing an array of mock schemas')
-	.option('-p, --pattern <glob>', 'File pattern for files containing mock schemas')
+	.option('-f, --file <name>', 'File containing an array of mock schemas.')
+	.option('-p, --pattern <glob>', 'File pattern for files containing mock schemas.')
+	.option('--port <port>', 'Port for mockercinno to run on.', process.env.MOCK_PORT || 8080)
 	.parse(process.argv)
 
 
@@ -65,6 +67,6 @@ if (commands.pattern) {
 			});
 }
 
-server.listen('8080', () => {
-	console.log(`Mock Server started on port ${8080}!`);
+server.listen(commands.port, () => {
+	console.log(`Mock Server started on port ${commands.port}!`);
 });
