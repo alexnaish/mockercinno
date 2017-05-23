@@ -1,35 +1,69 @@
 #!/usr/bin/env node
 const commands = require('commander');
 const glob = require('glob');
+const chokidar = require('chokidar');
 const fs = require('fs');
 const path = require('path');
 
 const server = require('../server/');
 const mockStore = require('../server/stores').mock;
 
+const preRequiredFiles = [];
+
 const requireAndParse = filePath => {
-	const fileContents = require(path.join(process.cwd(), filePath));
-	return (typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents);
+	try {
+		const fileContents = require(path.join(process.cwd(), filePath));
+		return (typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents);
+		preRequiredFiles.push(filePath);
+	} catch (e) {
+		console.error(`Failed to parse "${filePath}"`);
+	}
 };
 
-commands
-  .option('-f, --file <name>', 'File containing an array of mock schemas')
-  .option('-p, --pattern <name>', 'File pattern for files containing mock schemas')
-  .parse(process.argv)
+const requireFilesByGlob = globString => {
+	let defaults = [];
+	glob.sync(globString, {nodir: true}).map(file => {
+		const data = requireAndParse(file);
+		defaults = data ? defaults.concat(data) : defaults;
+	});
 
-let defaults = [];
+	return defaults;
+}
+
+commands
+	.option('-f, --file <name>', 'File containing an array of mock schemas')
+	.option('-p, --pattern <glob>', 'File pattern for files containing mock schemas')
+	.parse(process.argv)
+
 
 if (commands.file) {
-  defaults = defaults.concat(requireAndParse(commands.file));
+  const data = requireAndParse(commands.file);
+	data && mockStore.insert(data);
 }
 
 if (commands.pattern) {
-	glob.sync(commands.pattern, {nodir: true}).map(file => {
-		defaults = defaults.concat(requireAndParse(file));
-	});
-}
+		const watcher = chokidar.watch(commands.pattern, {
+			ignored: /(^|[\/\\])\../,
+			persistent: true
+		});
 
-mockStore.insert(defaults);
+		watcher
+	  	.on('add', path => {
+				if(!preRequiredFiles.includes(path)) {
+					const data = requireAndParse(path);
+					data && mockStore.insert(requireAndParse(path));
+				}
+			})
+	  	.on('change', filePath => {
+				console.log(`${filePath} has changed!`);
+				delete require.cache[require.resolve(path.join(process.cwd(), filePath))];
+				console.log("Clearing mockStore");
+				mockStore.reset();
+				console.log("Reloading mockStore");
+				mockStore.insert(requireFilesByGlob(commands.pattern));
+				console.log('Mocks reloaded!');
+			});
+}
 
 server.listen('8080', () => {
 	console.log(`Mock Server started on port ${8080}!`);

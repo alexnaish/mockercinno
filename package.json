@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon bin/mockercinno -p examples/**/*",
+    "dev": "bin/mockercinno --pattern 'examples/**/*'",
     "test": "jest",
     "precommit": "eslint ."
   },
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "chokidar": "^1.7.0",
     "commander": "^2.9.0",
     "cors": "^2.8.3",
     "express": "^4.15.3",

@@ -17,6 +17,9 @@ module.exports = {
 	insert: (mocks) => {
 		db.insert(mocks);
 	},
+	reset: () => {
+		db.remove({}, { multi: true });
+	},
 	find: (request) => {
 		return new Promise((resolve, reject) => {
 			db.findOne({
