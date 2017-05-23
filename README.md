@@ -1,10 +1,11 @@
 # Mockercinno
 
+Simple, declarative mock server.
+
 [![Build Status](https://travis-ci.org/alexnaish/mockercinno.svg?branch=master)](https://travis-ci.org/alexnaish/mockercinno)
 [![Code Climate](https://codeclimate.com/github/alexnaish/mockercinno/badges/gpa.svg)](https://codeclimate.com/github/alexnaish/mmockercinno)
 [![Dependencies](https://david-dm.org/alexnaish/mockercinno.svg)](https://david-dm.org/alexnaish/mockercinno)
 
-Simple, declarative mock server.
 
 ## Introduction
 
@@ -16,7 +17,7 @@ This was made to allow easy but flexible mocking out of external systems. Write 
 
 ## Usage
 
-`./node_modules/bin/mockercinno --pattern path/to/mocks/**/*`
+`./node_modules/bin/mockercinno --pattern 'path/to/mocks/**/*'`
 
 ## Prerequisites
 
