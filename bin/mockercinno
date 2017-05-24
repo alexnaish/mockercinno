@@ -5,8 +5,8 @@ const chokidar = require('chokidar');
 const fs = require('fs');
 const path = require('path');
 
-const server = require('../server/');
-const mockStore = require('../server/stores').mock;
+const server = require('../lib/server');
+const mockStore = require('../lib/stores').mock;
 
 const preRequiredFiles = [];
 

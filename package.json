@@ -2,10 +2,9 @@
   "name": "mockercinno",
   "version": "1.2.1",
   "description": "",
-  "main": "index.js",
   "bin": "./bin/mockercinno",
   "scripts": {
-    "dev": "bin/mockercinno --pattern 'examples/**/*'",
+    "start": "bin/mockercinno --pattern 'examples/**/*'",
     "test": "jest",
     "precommit": "eslint ."
   },
