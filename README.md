@@ -9,7 +9,7 @@ Simple, declarative mock server.
 
 ## Introduction
 
-This was made to allow easy but flexible mocking out of external systems. Write your service stubs as JSON (or in JS files that export JSON) in your project, point `mockercinno` to them and let the magic happen.
+Made to allow easy but flexible mocking out of external systems. Write your service stubs as JSON (or in JS files that export JSON) in your project, point `mockercinno` to them and let the magic happen. Features live-reloading of mock files to allow a quicker and easier development process.
 
 ## Installation
 
@@ -18,6 +18,16 @@ This was made to allow easy but flexible mocking out of external systems. Write 
 ## Usage
 
 `./node_modules/bin/mockercinno --pattern 'path/to/mocks/**/*'`
+
+### CLI Options
+
+
+* `--file` / `-f`
+	* Used to specify a single file by taking an exact file location. No live-reloading.
+* `--pattern` / `-p`
+	*  Takes a glob pattern in order to specify multiple files over multiple directories. Files and directories matching the glob are watched and will trigger live-reloading of the mock server.
+* `--port`
+	* Takes a numerical value to specify the port for `mockercinno`.
 
 ## Prerequisites
 
@@ -135,9 +145,9 @@ An example of the above settings:
 Responses can be configured to return dynamic data based off the request. Within the body of your mock response, simply place a JSON path within double curly brackets as such:
 
 ```
-	{
-		my_dynamic_data: "{{body.property}}"
-	}
+{
+	my_dynamic_data: "{{body.property}}"
+}
 ```
 
 The template path can resolve to an object or a string, depending on the data submitted. A further example of what data can be referenced can be found in [this example](examples/named.json).
@@ -149,6 +159,10 @@ Templates can access the following and their properties:
 * `query` - the query parameters of the request.
 * `headers` - the submitted request body of the request.
 * `mock` - the matched mock entry for the current request.
+
+## Debugging
+
+The `/__list` endpoint is reserved for listing all mocks registered and allows for filtering by request path by specifying a `path` query parameter. 
 
 ## Built With
 

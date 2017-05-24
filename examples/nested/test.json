@@ -1,4 +1,17 @@
-{
-	"nested": true,
-	"another": "flag"
-}
+[
+	{
+		"request": {
+			"method": "GET",
+			"path": "/nested/*",
+			"query": {
+				"test": "true"
+			}
+		},
+		"response": {
+			"status": 200,
+			"body": {
+				"path_matched": "{{mock.request.path}}"
+			}
+		}
+	}
+]
