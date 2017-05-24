@@ -1,5 +1,6 @@
 [
 	{
+		"name": "Trailing named route",
 		"request": {
 			"method": "GET",
 			"path": "/trailing/:name",

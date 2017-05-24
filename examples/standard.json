@@ -1,5 +1,6 @@
 [
 	{
+		"name": "Standard Wildcard",
 		"request": {
 			"method": "GET",
 			"path": "/standard/*"

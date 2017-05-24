@@ -1,5 +1,6 @@
 module.exports = [
 	{
+		name: 'JS Export',
 		request: {
 			method: 'GET',
 			path: '/export/*'

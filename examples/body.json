@@ -1,5 +1,6 @@
 [
 	{
+		"name": "Payload Matcher",
 		"request": {
 			"method": "POST",
 			"path": "/body/*",

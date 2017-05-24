@@ -1,5 +1,6 @@
 [
 	{
+		"name": "Named Route",
 		"request": {
 			"method": "POST",
 			"path": "/named/:name/test"

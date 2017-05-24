@@ -39,6 +39,7 @@ Made to allow easy but flexible mocking out of external systems. Write your serv
 
 [
 	{
+		"name": "Example Mock",
 		"request": {
 			"method": "GET",
 			"path": "/standard/*"
@@ -162,7 +163,7 @@ Templates can access the following and their properties:
 
 ## Debugging
 
-The `/__list` endpoint is reserved for listing all mocks registered and allows for filtering by request path by specifying a `path` query parameter. 
+The `/__list` endpoint is reserved for listing all mocks registered and allows for filtering by request path by specifying a `path` query parameter.
 
 ## Built With
 

@@ -1,5 +1,6 @@
 [
 	{
+		"name": "Headers Test",
 		"request": {
 			"method": "GET",
 			"path": "/headers/*",

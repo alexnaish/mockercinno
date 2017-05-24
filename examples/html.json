@@ -1,5 +1,6 @@
 [
 	{
+		"name": "HTML Response",
 		"request": {
 			"method": "GET",
 			"path": "/html/*"
