@@ -4,9 +4,9 @@ const route = require('path-match')();
 
 module.exports = {
 	path: (mock, request) => {
-		return mock.request.path === request.originalUrl
-			|| minimatch(request.originalUrl, mock.request.path)
-			|| !!route(mock.request.path)(request.originalUrl);
+		return mock.request.path === request.path
+			|| minimatch(request.path, mock.request.path)
+			|| !!route(mock.request.path)(request.path);
 	},
 	headers: (mock, request) => {
 		return _some([request.headers], mock.request.headers);

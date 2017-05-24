@@ -14,7 +14,8 @@ describe('Matchers', () => {
 				}
 			};
 			request = {
-				originalUrl: '/test'
+				originalUrl: '/test?blah=test',
+				path: '/test'
 			};
 		});
 
@@ -24,16 +25,23 @@ describe('Matchers', () => {
 
 		test('should return true if request path matches mock request greedy path', () => {
 			mock.request.path = '/test/*';
-			request.originalUrl = '/test/anything';
+			request.path = '/test/anything';
 
 			expect(matchers.path(mock, request)).toBe(true);
 		});
 
 		test('should return true if request path matches mock request named path', () => {
 			mock.request.path = '/test/:named/end';
-			request.originalUrl = '/test/anything/end';
+			request.path = '/test/anything/end';
 
 			expect(matchers.path(mock, request)).toBe(true);
+		});
+
+		test('should return false if request path does not match mock request named path', () => {
+			mock.request.path = '/test/:named/end';
+			request.path = '/this/will/never/match';
+
+			expect(matchers.path(mock, request)).toBe(false);
 		});
 
 	});

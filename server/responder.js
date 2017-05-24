@@ -1,5 +1,3 @@
-const parse = require('url').parse;
-
 const _map = require('lodash/mapKeys');
 const route = require('path-match')();
 
@@ -8,7 +6,7 @@ const Template = require('./template');
 module.exports = (mock, request, response) => {
 
 	const parameters = {
-		params: route(mock.request.path)(parse(request.originalUrl).pathname),
+		params: route(mock.request.path)(request.path),
 		query: request.query,
 		headers: request.headers,
 		body: request.body,
