@@ -1,6 +1,22 @@
 [
 	{
-		"name": "Standard Wildcard",
+		"name": "Standard Wildcard with Query",
+		"request": {
+			"method": "GET",
+			"path": "/standard/*",
+			"query": {
+				"test": "true"
+			}
+		},
+		"response": {
+			"status": 200,
+			"body": {
+				"data": "Specificity example"
+			}
+		}
+	},
+	{
+		"name": "Standard Wildcard Fallback",
 		"request": {
 			"method": "GET",
 			"path": "/standard/*"

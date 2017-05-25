@@ -60,11 +60,11 @@ Made to allow easy but flexible mocking out of external systems. Write your serv
 ### Route Matching
 
 The way mocks are matched against incoming requests follows a similar pattern to how Express handles route definitions.
-If you specify a "greedy" route first, then it will catch all similar routes even if the others are more specific.
+If you specify a "greedy" route first, it will catch all similar routes even if the others are more specific.
 
 ### Request Schema
 
-There are several levels of granularity when specifying a request depending on your requirements.
+There are several levels of granularity when specifying a request depending on your requirements. The properties specified are the minimum requirements for the request to match your mock.
 Properties are optimistically matched, meaning that if you specify one particular query parameter and the request contains that parameter in addition to others, it will return the mock as a match.
 You can limit a mock against the following properties of a request:
 
@@ -83,6 +83,7 @@ An example of the above settings:
 
 [
 	{
+		"name": "Specific Request Example",
 		"request": {
 			"method": "POST",
 			"path": "/standard/*",
@@ -120,6 +121,7 @@ An example of the above settings:
 
 [
 	{
+		"name": "Response Example",
 		"request": {
 			"method": "GET",
 			"path": "/example/*"
@@ -161,9 +163,15 @@ Templates can access the following and their properties:
 * `headers` - the submitted request body of the request.
 * `mock` - the matched mock entry for the current request.
 
-## Debugging
+### Helper Endpoints
 
-The `/__list` endpoint is reserved for listing all mocks registered and allows for filtering by request path by specifying a `path` query parameter.
+* `GET /__list`
+	* Returns a JSON array of all currently registered mocks, including their request and response schemas.
+	* Optional `path` query parameter allows filtering of mocks against their specified request path.
+* `POST /__refresh`
+	* Forces a purge and re-import of all registered mocks.
+	* Optional request body allows only a subset of mocks to be reloaded (useful for when you have a lot of mock files and don't want to purge them all)
+	* Request body can filter based off any mock attribute or file path of a given mock.
 
 ## Built With
 

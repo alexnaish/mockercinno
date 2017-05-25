@@ -5,31 +5,10 @@ const chokidar = require('chokidar');
 const fs = require('fs');
 const path = require('path');
 
+const logger = require('../lib/logger');
+const manager = require('../lib/manager');
 const server = require('../lib/server');
 const mockStore = require('../lib/stores').mock;
-
-const preRequiredFiles = [];
-
-const requireAndParse = filePath => {
-	try {
-		const fileContents = require(path.join(process.cwd(), filePath));
-		const parsedContents = typeof fileContents === 'string' ? JSON.parse(fileContents) : fileContents;
-		preRequiredFiles.push(filePath);
-		return parsedContents;
-	} catch (e) {
-		console.error(`Failed to parse "${filePath}"`);
-	}
-};
-
-const requireFilesByGlob = globString => {
-	let defaults = [];
-	glob.sync(globString, {nodir: true}).map(file => {
-		const data = requireAndParse(file);
-		defaults = data ? defaults.concat(data) : defaults;
-	});
-
-	return defaults;
-}
 
 commands
 	.option('-f, --file <name>', 'File containing an array of mock schemas.')
@@ -39,7 +18,7 @@ commands
 
 
 if (commands.file) {
-  const data = requireAndParse(commands.file);
+  const data = manager.import(commands.file);
 	data && mockStore.insert(data);
 }
 
@@ -51,19 +30,17 @@ if (commands.pattern) {
 
 		watcher
 	  	.on('add', path => {
-				if(!preRequiredFiles.includes(path)) {
-					const data = requireAndParse(path);
-					data && mockStore.insert(data);
-				}
+				const data = manager.import(path);
+				data && mockStore.insert(data);
 			})
 	  	.on('change', filePath => {
-				console.log(`${filePath} has changed!`);
-				delete require.cache[require.resolve(path.join(process.cwd(), filePath))];
-				console.log("Clearing mockStore");
-				mockStore.reset();
-				console.log("Reloading mockStore");
-				mockStore.insert(requireFilesByGlob(commands.pattern));
-				console.log('Mocks reloaded!');
+				logger.info(`${filePath} has changed!`);
+
+				mockStore.reset({ file: filePath });
+				manager.clearCache(filePath);
+				logger.info("Reloading mockStore");
+				const data = manager.import(filePath);
+				data && mockStore.insert(data) && logger.info('Successfully reloaded');
 			});
 }
 
