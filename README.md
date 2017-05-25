@@ -3,8 +3,9 @@
 Simple, declarative mock server.
 
 [![Build Status](https://travis-ci.org/alexnaish/mockercinno.svg?branch=master)](https://travis-ci.org/alexnaish/mockercinno)
-[![Code Climate](https://codeclimate.com/github/alexnaish/mockercinno/badges/gpa.svg)](https://codeclimate.com/github/alexnaish/mmockercinno)
+[![Code Climate](https://codeclimate.com/github/alexnaish/mockercinno/badges/gpa.svg)](https://codeclimate.com/github/alexnaish/mockercinno)
 [![Dependencies](https://david-dm.org/alexnaish/mockercinno.svg)](https://david-dm.org/alexnaish/mockercinno)
+[![Latest Release](https://img.shields.io/npm/v/mockercinno.svg)](https://www.npmjs.com/package/mockercinno)
 
 
 ## Introduction
