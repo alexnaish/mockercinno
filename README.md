@@ -173,7 +173,8 @@ Templates can access the following and their properties:
 	* Forces a purge and re-import of all registered mocks.
 	* Optional request body allows only a subset of mocks to be reloaded (useful for when you have a lot of mock files and don't want to purge them all)
 	* Request body can filter based off any mock attribute or file path of a given mock.
-
+* `GET /__gtg`
+	* Returns a standard 200 OK response to indicate the app is alive (useful if you're deploying the app and want to check if it has started yet).
 ## Built With
 
 * [Express](https://github.com/expressjs/express)
