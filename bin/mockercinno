@@ -11,10 +11,11 @@ commands
 	.option('-f, --file <name>', 'File containing an array of mock schemas.')
 	.option('-p, --pattern <glob>', 'File pattern for files containing mock schemas.')
 	.option('--port <port>', 'Port for mockercinno to run on.', process.env.MOCK_PORT || 8080)
+	.option('-s, --strict', 'Throw error on importing invalid mock files')
 	.parse(process.argv);
 
 if (commands.file) {
-	const data = manager.import(commands.file);
+	const data = manager.import(commands.file, { strict: commands.strict });
 	data && mockStore.insert(data);
 }
 
@@ -26,7 +27,7 @@ if (commands.pattern) {
 
 		watcher
 			.on('add', path => {
-				const data = manager.import(path);
+				const data = manager.import(path, { strict: commands.strict });
 				data && mockStore.insert(data);
 			})
 			.on('change', filePath => {
@@ -34,7 +35,7 @@ if (commands.pattern) {
 				mockStore.reset({ file: filePath });
 				manager.clearCache(filePath);
 				logger.info('Reloading mockStore');
-				const data = manager.import(filePath);
+				const data = manager.import(filePath, { strict: commands.strict });
 				data && mockStore.insert(data) && logger.info('Successfully reloaded');
 			});
 }
