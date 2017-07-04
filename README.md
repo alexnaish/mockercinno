@@ -114,8 +114,8 @@ An example of the above settings:
 ### Response Schema
 
 *  `status` - The status code of the response.
-*  `headers` - An object containing header names as keys and their corresponding values.
-*  `cookies` - An object containing header names as keys and their corresponding values.
+*  `headers` - An object containing headers as keys and their corresponding values.
+*  `cookies` - An object containing cookies as keys and their corresponding values.
 *  `body` - An object defining the response body.
 
 An example of the above settings:
@@ -156,14 +156,14 @@ Responses can be configured to return dynamic data based off the request. Within
 }
 ```
 
-The template path can resolve to an object or a string, depending on the data submitted. A further example of what data can be referenced can be found in [this example](examples/named.json).
+The template path can resolve to an object or a string, depending on the data submitted. A further example of what data can be referenced can be found in [this example](https://github.com/alexnaish/mockercinno/blob/master/examples/named.json).
 
 Templates can access the following and their properties:
 
 * `params` - if the mock used a named parameter path, the named matches will be accessible here.
-* `body` - the submitted request body of the request.
+* `body` - the submitted body of the request.
 * `query` - the query parameters of the request.
-* `headers` - the submitted request body of the request.
+* `headers` - the submitted headers of the request.
 * `mock` - the matched mock entry for the current request.
 
 ### Helper Endpoints
