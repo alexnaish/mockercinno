@@ -29,6 +29,8 @@ Made to allow easy but flexible mocking out of external systems. Write your serv
 	*  Takes a glob pattern in order to specify multiple files over multiple directories. Files and directories matching the glob are watched and will trigger live-reloading of the mock server.
 * `--port`
 	* Takes a numerical value to specify the port for `mockercinno`.
+* `--strict`
+	* Specifies whether to throw an error if an imported mock file is invalid.
 
 ## Prerequisites
 
