@@ -76,7 +76,9 @@ You can limit a mock against the following properties of a request:
     *  Direct - `/some/path/here`
     *  Named - `/some/:name/here`
     *  Greedy - `/some/route/*`
-*  `query` - An object containing required key-value query parameters.
+*  `query` - An object containing required key-value query parameters. These can be tested in the following ways:
+		* String (simple exact string matching)
+		* RegExp
 *  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
 *  `body` - An object for which a request request body must contain for it to match.
 

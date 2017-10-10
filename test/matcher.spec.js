@@ -147,7 +147,7 @@ describe('Matcher', () => {
 				email: 'foo@bar.com'
 			};
 
-			expect(matcher.query(mock, request)).toBe(false);
+			expect(matcher.query(mock, request)).toBe(true);
 		});
 
 	});
