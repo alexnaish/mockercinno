@@ -140,6 +140,16 @@ describe('Matcher', () => {
 			expect(matcher.query(mock, request)).toBe(false);
 		});
 
+		test('RegExp - should return true if request query matches', () => {
+			mock.request.query.email = /.*?@bar\.com/;
+
+			request.query = {
+				email: 'foo@bar.com'
+			};
+
+			expect(matcher.query(mock, request)).toBe(false);
+		});
+
 	});
 
 	describe('body', () => {
