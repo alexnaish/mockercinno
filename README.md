@@ -76,7 +76,7 @@ You can limit a mock against the following properties of a request:
     *  Direct - `/some/path/here`
     *  Named - `/some/:name/here`
     *  Greedy - `/some/route/*`
-*  `query` - An object containing required key-value query parameters. These can be tested in the following ways:
+*  `query` - An object containing required key-value query parameters. Each query parameter can be tested in the following way:
 		* String (simple exact string matching)
 		* RegExp
 *  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
@@ -93,7 +93,8 @@ An example of the above settings:
 			"method": "POST",
 			"path": "/standard/*",
 			"query": {
-				"test": "yes"
+				"test": "yes",
+				"email": /.*?@example\.com/
 			},
 			"headers": {
 				"x-test": "yes"
