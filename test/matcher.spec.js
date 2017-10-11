@@ -141,7 +141,10 @@ describe('Matcher', () => {
 		});
 
 		test('RegExp - should return true if request query matches', () => {
-			mock.request.query.email = /.*?@bar\.com/;
+			mock.request.query.email = {
+				type: 'regex',
+				value: '.*?@bar\.com'
+			};
 
 			request.query = {
 				test: 'this',

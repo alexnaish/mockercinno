@@ -78,7 +78,7 @@ You can limit a mock against the following properties of a request:
     *  Greedy - `/some/route/*`
 *  `query` - An object containing required key-value query parameters. Each query parameter can be tested in the following way:
 		* String (simple exact string matching)
-		* RegExp
+		* RegExp (see how to define below)
 *  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
 *  `body` - An object for which a request request body must contain for it to match.
 
@@ -94,7 +94,11 @@ An example of the above settings:
 			"path": "/standard/*",
 			"query": {
 				"test": "yes",
-				"email": /.*?@example\.com/
+				"email": {
+					type: "regex",
+					value: ".*?@example\.com",
+					modifiers: "i"
+				}
 			},
 			"headers": {
 				"x-test": "yes"
