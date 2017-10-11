@@ -144,6 +144,7 @@ describe('Matcher', () => {
 			mock.request.query.email = /.*?@bar\.com/;
 
 			request.query = {
+				test: 'this',
 				email: 'foo@bar.com'
 			};
 
