@@ -131,6 +131,7 @@ An example of the above settings:
 *  `headers` - An object containing headers as keys and their corresponding values.
 *  `cookies` - An object containing cookies as keys and their corresponding values.
 *  `body` - An object defining the response body.
+*  `delay` - An integer representing the number of milliseconds to respond after.
 
 An example of the above settings:
 
@@ -153,7 +154,8 @@ An example of the above settings:
 			},
 			"body": {
 				"data": "something"
-			}
+			},
+			"delay": 4000
 		}
 	}
 ]
