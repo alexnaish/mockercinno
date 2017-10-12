@@ -114,6 +114,16 @@ describe('Matcher', () => {
 			};
 		});
 
+		test('should return true if mock has no query specified', () => {
+			delete mock.request.query;
+			expect(matcher.query(mock, request)).toBe(true);
+		});
+
+		test('should return true if mock has empty query specified', () => {
+			delete mock.request.query.test;
+			expect(matcher.query(mock, request)).toBe(true);
+		});
+
 		test('should return true if request query exactly match mock request query', () => {
 			expect(matcher.query(mock, request)).toBe(true);
 		});
@@ -196,7 +206,7 @@ describe('Matcher', () => {
 
 		test('should return false if request body does not contain the mock request header values', () => {
 			request.body = {
-				another: 'header'
+				another: 'field'
 			};
 
 			expect(matcher.body(mock, request)).toBe(false);

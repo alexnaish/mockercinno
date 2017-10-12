@@ -76,11 +76,13 @@ You can limit a mock against the following properties of a request:
     *  Direct - `/some/path/here`
     *  Named - `/some/:name/here`
     *  Greedy - `/some/route/*`
-*  `query` - An object containing required key-value query parameters. Each query parameter can be tested in the following way:
+*  `query` - An object containing required key-value query parameters.
+*  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
+*  `body` - An object for which a request body must contain for it to match.
+
+`query`, `header` and `body` parameters can be tested in the following ways:
 		* String (simple exact string matching)
 		* RegExp (see how to define below)
-*  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
-*  `body` - An object for which a request request body must contain for it to match.
 
 An example of the above settings:
 
@@ -101,10 +103,15 @@ An example of the above settings:
 				}
 			},
 			"headers": {
-				"x-test": "yes"
+				"x-test": "yes",
 			},
 			"body": {
-				"user": "example"
+				"user": "example",
+				"email": {
+					type: "regex",
+					value: ".*?@domain\.com",
+					modifiers: "i"
+				}
 			}
 		},
 		"response": {
@@ -184,6 +191,7 @@ Templates can access the following and their properties:
 	* Request body can filter based off any mock attribute or file path of a given mock.
 * `GET /__gtg`
 	* Returns a standard 200 OK response to indicate the app is alive (useful if you're deploying the app and want to check if it has started yet).
+
 ## Built With
 
 * [Express](https://github.com/expressjs/express)
