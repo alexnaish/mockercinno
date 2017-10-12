@@ -194,7 +194,7 @@ Templates can access the following and their properties:
 
 ### Examples
 
-Everything documented here has a code example within the [examples](https://github.com/alexnaish/mockercinno/blob/master/examples/named.json) folder.
+Everything documented here has a code example within the [examples](https://github.com/alexnaish/mockercinno/blob/master/examples/) folder.
 
 ## Built With
 
