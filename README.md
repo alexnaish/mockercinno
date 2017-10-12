@@ -192,6 +192,10 @@ Templates can access the following and their properties:
 * `GET /__gtg`
 	* Returns a standard 200 OK response to indicate the app is alive (useful if you're deploying the app and want to check if it has started yet).
 
+### Examples
+
+Everything documented here has a code example within the [examples](https://github.com/alexnaish/mockercinno/blob/master/examples/named.json) folder.
+
 ## Built With
 
 * [Express](https://github.com/expressjs/express)
