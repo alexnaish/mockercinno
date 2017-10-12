@@ -1,0 +1,9 @@
+node_modules
+examples
+test
+.codeclimate.yml
+.eslintrc
+.gitignore
+.travis.yml
+LICENSE
+yarn.lock
