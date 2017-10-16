@@ -34,7 +34,7 @@ Made to allow easy but flexible mocking out of external systems. Write your serv
 
 ## Prerequisites
 
-*  Node 6 (or greater)
+*  Node 8 (or greater)
 
 ## Example Mock File
 
