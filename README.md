@@ -79,6 +79,7 @@ You can limit a mock against the following properties of a request:
 *  `query` - An object containing required key-value query parameters.
 *  `headers` - An object containing key-value header parameters. **All keys must be lower-cased**
 *  `body` - An object for which a request body must contain for it to match.
+*  `custom` - An object which allows a custom function to be run against the mock.
 
 `query`, `header` and `body` parameters can be tested in the following ways:
 		* String (simple exact string matching)
@@ -112,6 +113,12 @@ An example of the above settings:
 					value: ".*?@domain\.com",
 					modifiers: "i"
 				}
+			},
+			"custom": {
+				// Location of the function
+				location: "custom/matchers/file",
+				// Additional arguments that will be spread onto the function
+				additionalArgs: ["something", "for", "this", "mock"]
 			}
 		},
 		"response": {
@@ -160,6 +167,19 @@ An example of the above settings:
 	}
 ]
 
+```
+
+### Custom Matchers
+
+Custom matchers are user defined functions that are called with the mock as the first parameter, the request as the second and any additional arguments specified spread as the 3rd, 4th...nth argument. An example can be found in: [this example](https://github.com/alexnaish/mockercinno/blob/master/matchers/example/exclusion.js)
+
+The file specified must export a function as its default. Either:
+
+```
+// CJS
+module.exports = myFunction;
+// ES6
+export default myFunction;
 ```
 
 ### Templating
