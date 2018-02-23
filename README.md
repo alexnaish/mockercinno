@@ -116,7 +116,7 @@ An example of the above settings:
 			},
 			"custom": {
 				// Location of the function
-				location: "custom/matchers/file",
+				function: "custom/matchers/file",
 				// Additional arguments that will be spread onto the function
 				additionalArgs: ["something", "for", "this", "mock"]
 			}
